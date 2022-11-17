@@ -46,7 +46,7 @@ public class LyricsParser {
     }
 
     private String getReadable(String rawLyrics) {
-        //Remove start
+       //Remove start
         rawLyrics = rawLyrics.replaceAll("[\\S\\s]*<div class=\\\\\\\\\\\\\"rg_embed_body\\\\\\\\\\\\\">[ (\\\\\\\\n)]*", "");
         //Remove end
         rawLyrics = rawLyrics.replaceAll("[ (\\\\\\\\n)]*<\\\\/div>[\\S\\s]*", "");

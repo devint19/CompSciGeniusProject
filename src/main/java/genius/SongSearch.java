@@ -37,6 +37,7 @@ public class SongSearch {
         }
     }
 
+
     private void request(URI uri) throws IOException {
         try {
             HttpURLConnection con = this.gla.getHttpManager().getConnection(uri.toURL());
@@ -125,6 +126,7 @@ public class SongSearch {
             return this.artist;
         }
 
+        //HAIIIIIII
         public String fetchLyrics() {
             return new LyricsParser(SongSearch.this.gla).get(this.id + "");
         }
