@@ -92,15 +92,18 @@ public class GLA {
                 }
             }
 
+            //ask for play again, guess the lyric, or end game
             System.out.println();
             System.out.println("Want to play again? Press 1 to Play Again, 2 to Play 'Guess the Lyric', or 3 to Quit");
             int playAgain = getNum();
 
+            //validation for game choice
             while (playAgain <= 0||playAgain > 3) {
                 System.out.println("Try Again:");
                 playAgain = getNum();
             }
 
+            //if they end game, print score and end the loop
             if (playAgain==3){
                 System.out.println("Thanks for playing! You had " + points + " points!");
                 game=false;
@@ -145,27 +148,33 @@ public class GLA {
 
                     //check to make sure line is not a header or an empty line
                     if (line.indexOf("[")==-1 && !line.equals("")) {
-                        //split into array of words
+                        //split line into array of words
                         String[] arrOfLine = line.split(" ");
+                        //remove a random word to be a blank
                         int remove = (int) (Math.random() * (arrOfLine.length));
                         String blank = arrOfLine[remove];
+                        //if word is a common word, pick another until it isn't
                         while (blank.equalsIgnoreCase("the") || blank.equalsIgnoreCase("and") || blank.equalsIgnoreCase("or") || blank.equalsIgnoreCase("is") || blank.equalsIgnoreCase("I") || blank.equalsIgnoreCase("a")){
                             remove = (int) (Math.random() * (arrOfLine.length));
                             blank = arrOfLine[remove];
                         }
+                        //replace removed word with blank
                         arrOfLine[remove] = "_______";
+                        //remove punctuation so that they aren't included in the word
                         blank = blank.replace(",","");
                         blank = blank.replace("(","");
                         blank = blank.replace(")","");
                         blank = blank.replace("-","");
                         blank = blank.replace("?","");
 
-                        //print each word
+                        //print each word (the lines are printed word by word)
                         for (String word : arrOfLine) {
                             System.out.print(word);
                             System.out.print(" ");
                         }
                         System.out.println();
+
+                        //begin actual game and check if guesses are right
                         System.out.print("Finish the lyric: ");
                         //get user guess (no validation needed)
                         String guess = s.nextLine();
@@ -190,12 +199,16 @@ public class GLA {
                     System.out.println();
                 }
 
+                //give player a new game choice
                 System.out.println("Want to play again? Press 1 to Play Again or 2 to Quit");
                 playAgain = getNum();
+                //validating choice
                 while (playAgain < 1 ||playAgain > 2) {
                     System.out.println("Try Again:");
                     playAgain = getNum();
                 }
+
+                //end game if the user chooses, else continue loop
                 if (playAgain==2){
                     System.out.println("Thanks for playing! You had " + points + " points!");
                     game=false;
@@ -205,15 +218,8 @@ public class GLA {
             }
         }
 
-        /*
-        System.out.println("Searching...");
-        long startMs = System.currentTimeMillis();
-        System.out.println(gla.search(singer).getHits().get(0).fetchLyrics());
-        System.out.println(System.currentTimeMillis() - startMs + "ms");
-        System.out.print(gla.search("Taylor Swift").getHits().get(1).getImageUrl());
-        */
-
     }
+    //try catch so that strings can't be input when it should be an int
     public static int getNum() {
         int num = -1;
         try {
